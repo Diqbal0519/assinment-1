@@ -1,13 +1,14 @@
 /*
  COP3014: Programmming II
- Assignment 0 - Display a message and ask the user for their age, which you then display back to the user
+ Assignment 1 - Creating a coin dispenser, which asks the user to enter a value in $xx.xx and converts the value into coins
  Duha Iqbal
- 01/15/2023
+ 01/26/2024
 */
 
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <cstdlib>
 
 using namespace std;
 
@@ -26,13 +27,16 @@ int main( )
     cout << "Welcome to the Coin Dispenser" << endl;
    
     //ask user to enter conversion amount
-    do{
-        cout << "\nEnter the value you would like to convert to coins(must be between 0.00 and 100.00): $";
+        cout << "\nEnter the value you would like to convert to coins( must be in format $xx.xx): $";
         cin >> user_amount;
-        cout << "\n--------------------------------------------------------------------------------------------" << endl;
-    } while(user_amount < 0.00 || user_amount > 100.00); //continue to ask until conversion amount is between $0 and $100
+        cout << "\n-----------------------------------------------------------------------------------" << endl;
+    if(user_amount < 0.00 || user_amount > 100.00){
+        cout << "Value must be between $0.00 and $100.00" << endl;
+        exit(1);
+        //program will abort if conversion amount is not between $0 and $100
+    }
     
-    // convert conversion amount into cents, with rounding to diplay correct coin conversion
+    // convert conversion amount into cents, with rounding to diplay correct coin conversion. Example: when the user enters $2.01 without the rounding function, the conversion does not account for the penny
     cent_value = static_cast<int> (round(user_amount * 100));
     
     // find the amount of each type of coin
@@ -49,7 +53,7 @@ int main( )
     cents_left %= PENNY;
     
     // display original value and amount of each coin type after conversion
-    cout << "\nThe original amount: $" << user_amount << endl;
+    cout << "\nThe original amount: $" << setprecision(4) << user_amount << endl;
     cout << "\nAfter Conversion: " << endl;
     cout << "- " << quarters << " Quarters" << endl;
     cout << "- " << dimes << " Dimes" << endl;
