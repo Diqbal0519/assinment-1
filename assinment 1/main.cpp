@@ -5,6 +5,15 @@
  01/26/2024
 */
 
+/*
+ test cases
+ 1. $1.00: 4 quarters
+ 2. $1.01: 4 quarters and 1 penny
+ 3. $1.99: 7 quarters, 2 dimes, and 4 pennies
+ 4. $-1.00: error message and aborted program
+ 5. $101.00: error message and aborted program
+ */
+
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -53,7 +62,7 @@ int main( )
     cents_left %= PENNY;
     
     // display original value and amount of each coin type after conversion
-    cout << "\nThe original amount: $" << setprecision(4) << user_amount << endl;
+    cout << "\nThe original amount: $" << fixed << setprecision(2) << user_amount << endl;
     cout << "\nAfter Conversion: " << endl;
     cout << "- " << quarters << " Quarters" << endl;
     cout << "- " << dimes << " Dimes" << endl;
